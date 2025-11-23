@@ -1,22 +1,29 @@
-
+import os
 import telebot
 
-BOT_TOKEN = "8267938733:AAGhhKLDNx12UCNyGL6cn0I0eSQr_AINCs0"
+# بنجيب التوكن من Environment Variables
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+
+if not BOT_TOKEN:
+    raise Exception("❌ مفيش BOT_TOKEN موجود في Environment Variables")
+
 bot = telebot.TeleBot(BOT_TOKEN)
 
 @bot.message_handler(commands=['start'])
-def send_welcome(message):
+def welcome(message):
     bot.send_message(
         message.chat.id,
-        """  
-جميع التفاصيل اللي محتاجها داخل الجروب  
-لا تنسي متابعة الجروب الرسمي  
-ولا تتردد في التواصل مع الدعم عند وجود استفسار  
+        """✨ أهلاً بيك ✨
 
+جميع التفاصيل اللي محتاجها موجودة داخل الجروب.
+
+لا تنسى متابعة الجروب الرسمي ولا تتردد في التواصل مع الدعم لو عندك أي استفسار.
+
+🔗 رابط الجروب:
 https://t.me/+wnLokF1pLzs3ZmI0
 
-نتمني لكم التوفيق والنجاح الدائم 🌟
-        """
+نتمنى لكم التوفيق والنجاح الدائم 🌟
+"""
     )
 
 bot.polling(none_stop=True)
